@@ -6,13 +6,12 @@ cpeList = set()
 def readCPEs(inputFile, outputFile):
     for line in inputFile:
         split = line.split()
-        if pattern in split and pattern != prev:
-            # get rid of commas and quotes
+        if pattern in split:
             cpeName = split[-1].replace(',','').replace('"','') # cpe name should be last list element
             cpeList.add(cpeName)
     
     for cpeName in cpeList:
-        outputFile.write(cpeName)
+        outputFile.write(cpeName+'\n')
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
