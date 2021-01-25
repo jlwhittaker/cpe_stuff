@@ -1,19 +1,18 @@
 import sys
 
 pattern = '"cpe23Uri"'
+cpeList = set()
 
 def readCPEs(inputFile, outputFile):
-    prev = [] # store previous cpe to avoid duplicates
     for line in inputFile:
         split = line.split()
         if pattern in split and pattern != prev:
-            # cpe found and is not a duplicate
-
             # get rid of commas and quotes
             cpeName = split[-1].replace(',','').replace('"','') # cpe name should be last list element
-            outputFile.write(cpeName+"\n")
-            prev = split
-
+            cpeList.add(cpeName)
+    
+    for cpeName in cpeList:
+        outputFile.write(cpeName)
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
